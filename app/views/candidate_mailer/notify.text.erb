@@ -1,0 +1,22 @@
+<%= interpolate(@content['question']) %>
+
+<% if @content['materials'] -%>
+  <% @content['materials'].each do |material| -%>
+* <%= interpolate(material) %>
+  <% end -%>
+<% end -%>
+
+<% if @content['tips'] -%>
+  <% if @content['tips']['header'] -%>
+<%= interpolate(@content['tips']['header']) %>
+  <% end -%>
+
+  <% if @content['tips']['list'] -%>
+    <% @content['tips']['list'].each do |tip| -%>
+* <%= interpolate(tip) %>
+    <% end -%>
+  <% end -%>
+<% end -%>
+
+Update us on your progress:
+<%= @token.path_with_token('view') %>

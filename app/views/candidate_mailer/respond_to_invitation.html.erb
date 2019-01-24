@@ -1,0 +1,12 @@
+<p><%= @fellow.first_name %>,<br />
+We found an opportunity that matches your Braven Job Hunter profile:</p>
+
+<p><strong><%= @opportunity.name %></strong></p>
+<%= paragraph_format @opportunity.summary %>
+
+<p>Are you interested in this opportunity?</p>
+
+<ul class="response-links">
+  <li class="yes"><%= button_to_status_update 'respond to invitation', 'research employer', 'Tell me more!' %></li>
+  <li class="no-longer-interested"><%= button_to_status_update 'respond to invitation', 'fellow declined', 'Not Interested' %></li>
+</ul>

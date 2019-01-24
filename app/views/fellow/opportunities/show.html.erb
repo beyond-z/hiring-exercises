@@ -1,0 +1,126 @@
+<h1><%= @candidate.opportunity.formatted_name %></h1>
+<table>
+  <tbody>
+    <tr>
+      <th>About this opportunity:</th>
+      <td colspan=""><%= @candidate.opportunity.summary %></td>
+    </tr>
+    <tr class="lists">
+      <td><%= render('admin/industries/list', object: @candidate.opportunity) unless @candidate.opportunity.industries.empty? %></td>
+      <td><%= render('admin/interests/list', object: @candidate.opportunity) unless @candidate.opportunity.interests.empty? %></td>
+    </tr>
+    <% unless @candidate.opportunity.referral_email.blank? %>
+      <tr>
+        <th>Referral Contact E-mail:</th>
+        <td><%= link_to @candidate.opportunity.referral_email, "mailto:#{@candidate.opportunity.referral_email}" %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <th>How to Apply:</th>
+      <td><%= @candidate.opportunity.how_to_apply %></td>
+    </tr>
+    <tr>
+      <th>Job Posting URL:</th>
+      <td><a href="<%= @candidate.opportunity.job_posting_url %>" target="_blank"><%= @candidate.opportunity.job_posting_url %></a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<% if @candidate.stage == 'respond to invitation' %>
+  <h2>Are you Interested in This Opportunity?</h2>
+  
+  <ul class="response-links">
+    <li class="yes"><%= button_to_status_update 'respond to invitation', 'research employer', 'Interested' %></li>
+    <li class="no-longer-interested"><%= button_to_status_update 'respond to invitation', 'fellow declined', 'Not Interested' %></li>
+  </ul>
+<% else %>
+  <h2>Where am I in the process?</h2>
+
+  <%= @candidate.stage %>
+
+  <p><strong>Note:</strong> You're not expected to do everything below in one go.<br />If you take a break we'll simply send you a helpful reminder so you can pick up where you left off.</p>
+
+  <h3>Recommended Action</h3>
+
+  <table class="opportunity-stages">
+    <tbody>
+      <% completion = 'completed' %>
+
+      <% ['Apply', 'Interview', 'Offer'].each do |phase| %>
+        <% phase_content = @content.select{|k,v| v['phase'] == phase} %>
+
+        <% phase_content.each do |stage_name, content| %>
+          <tr>
+            <% if stage_name == @candidate.stage # Active Stage %>
+              <% completion = 'not-completed' %> 
+
+              <td class="stage active-stage phase-<%= phase.downcase %>">
+                <% if flash[:stage_notice] %>
+                  <div id="stage-notice"><%= interpolate(flash[:stage_notice]) %></div>
+                <% end %>
+              
+                <h3>
+                  <span class="inline-phase"><%= phase %></span><%= content['phase_position'] %>. <%= interpolate(content['title']) %>
+                </h3>
+                <% if content['burden'] %>
+                  <p class="burden">This usually takes about <%= interpolate(content['burden']) %> to do.</p>
+                <% end %>
+                <% if content['tips'] %>
+                  <p class="tip-cue toggle-next">How to do this?</p>
+                  <div class="tips more collapsed">
+                    <% if content['tips']['header'] %>
+                      <p><%= interpolate(content['tips']['header']) %></p>
+                    <% end %>
+                    <% if content['tips']['list'] %>
+                      <ul>
+                        <% content['tips']['list'].each do |tip| %>
+                          <li><%= interpolate(tip) %></li>
+                        <% end %>
+                      </ul>
+                    <% end %>
+                  </div>
+                <% end %>
+                <% if content['links'] %>
+                  <h4 class="question"><%= interpolate(content['question']) %></h4>     
+                  <ul class="response-links">
+                    <% content['links'].each do |update, label| %>
+                      <li><%= button_to_status_update @opportunity_stage.name, update, label %></li>
+                    <% end %>
+                  </ul>
+                <% end %>
+              </td>
+
+            <% else # Not the active Stage %>
+              <td class="stage <%= completion %> phase-<%= phase.downcase %> inactive">
+                <h4 class="toggle-next">
+                  <span class="inline-phase"><%= phase %></span><%= content['phase_position'] %>. <%= interpolate(content['title']) %>
+                  <% if content['burden'] %>
+                    <span class="burden">About <%= interpolate(content['burden']) %></span>
+                  <% end %>    
+                </h4>
+                <div class="more collapsed">
+                  <h5 class="question"><%= interpolate(content['question']) %></h5>     
+                  <% if content['tips'] %>
+                    <div class="tips">
+                      <% if content['tips']['header'] %>
+                        <p><%= interpolate(content['tips']['header']) %></p>
+                      <% end %>
+                      <% if content['tips']['list'] %>
+                        <ul>
+                          <% content['tips']['list'].each do |tip| %>
+                            <li><%= interpolate(tip) %></li>
+                          <% end %>
+                        </ul>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

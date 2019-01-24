@@ -1,0 +1,18 @@
+<div id="career-progress" class="<%= @fellow.career_steps.all?(&:completed?) ? ' all-done' : '' %>">
+
+  <h2>Braven Job Hunter</h2>
+
+  <p>You can get more relevant opportunities by keeping <%= link_to 'your profile', fellow_profile_path %> up to date.</p>
+
+  <h3><%= @fellow.first_name %>&rsquo;s Matches</h3>
+
+  <% if @fellow.fellow_opportunities.empty? %>
+    <p>None at this time. You'll be notified when new ones come up that match <%= link_to 'your profile', fellow_profile_path %>.</p>
+  <% else %>
+    <ul class="fellow-opportunities">
+      <% @fellow.fellow_opportunities.each do |candidate| %>
+        <li><%= link_to candidate.opportunity.formatted_name, fellow_opportunity_path(candidate) %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

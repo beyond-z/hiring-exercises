@@ -1,0 +1,92 @@
+<h1><%= @fellow.first_name %> <%= @fellow.last_name %></h1>
+
+<table>
+  <tbody>
+    <tr class="key">
+      <th>Key:</th>
+      <td><%= @fellow.key %></td>
+    </tr>
+    <tr>
+      <th>Resumé:</th>
+      <td><%= resume_links(@fellow) %></td>
+    </tr>
+    <tr class="new-section">
+      <th>Graduation year:</th>
+      <td><%= @fellow.graduation_year %></td>
+    </tr>
+    <tr>
+      <th>Graduation semester:</th>
+      <td><%= @fellow.graduation_semester %></td>
+    </tr>
+    <tr>
+      <th>Graduation fiscal year:</th>
+      <td><%= @fellow.graduation_fiscal_year %></td>
+    </tr>
+    <tr>
+      <th>Industries/Interests:</th>
+      <td><%= @fellow.industry_interest_tags.gsub(';', ', ') %></td>
+    </tr>
+    <tr>
+      <th>Majors:</th>
+      <td><%= @fellow.major_tags.gsub(';', ', ') %></td>
+    </tr>
+    <tr>
+      <th>Preferred Locations:</th>
+      <td><%= @fellow.metro_tags.gsub(';', ', ') %></td>
+    </tr>
+    <tr>
+      <th>Affiliations:</th>
+      <td><%= @fellow.affiliations %></td>
+    </tr>
+    <tr>
+      <th>Gpa:</th>
+      <td><%= @fellow.gpa %></td>
+    </tr>
+    <tr>
+      <th>Linkedin url:</th>
+      <td><%= @fellow.linkedin_url %></td>
+    </tr>
+    <tr>
+      <th>Staff notes:</th>
+      <td><%= @fellow.staff_notes %></td>
+    </tr>
+    <tr>
+      <th>Efficacy score:</th>
+      <td><%= @fellow.efficacy_score %></td>
+    </tr>
+    <tr>
+      <th>Employment status:</th>
+      <td><%= @fellow.employment_status.name %></td>
+    </tr>
+    <tr>
+      <th>Contact about Opportunities:</th>
+      <td><%= @fellow.receive_opportunities ? 'yes' : 'no' %></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Contact Info</h3>
+
+<table>
+  <tbody>
+    <tr class="key">
+      <th>Phone:</th>
+      <td><%= @fellow.contact.phone %></td>
+    </tr>
+    <tr>
+      <th>E-Mail:</th>
+      <td>
+        <% if @fellow.contact.email.present? %>
+          <%= link_to @fellow.contact.email, "mailto:#{@fellow.contact.email}" %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>Address:</th>
+      <td><%= address_for(@fellow.contact) %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_admin_fellow_path(@fellow) %> |
+<%= link_to 'Back', admin_fellows_path %>
