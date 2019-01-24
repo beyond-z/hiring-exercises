@@ -25,7 +25,9 @@ Now create the needed databases.
 
     docker-compose exec career-mgr rake db:create db:schema:load db:init db:seed
 
-We've configured Docker to run our Rails app on port 3010, so go to http://localhost:3010 in your favorite browser. If everything's working correctly, you should see the greeting, "Yay! You're on Rails!"
+We've configured Docker to run our Rails app on port 3010, so go to http://localhost:3010 in your favorite browser. If everything's working correctly, you should be brought to a login page. Login with career.admin@bebraven.org with password test1234. If that works, you should see a page with a list of Opportunities, Fellows, Industries, etc.
+
+To see the Fellow experience (as opposed to admin), open up `docs/TestFellowAccount_SoftwareEngineerHiring.csv`, change `<insertyouremail>` in Column D to your actual email, save and upload the .csv under the Fellows page from the admin dashboard (accessed above). Finally, email the Braven tech team with the user name and email to add to the staging environment so you can login.
 
 To interact with the app in the console, run this:
 
@@ -42,39 +44,6 @@ Be sure to re-source this file in any open console windows to get it to work. No
     
     # run database migrations
     career rake db:migrate
-
-### Non-Docker (untested)
-
-First, we need to copy a couple of environment files in the app directory:
-
-    cp .env.example .env
-    cp .env.database.example .env.database
-
-Change the POSTGRES_PASSWORD in `.env` and `.env.database`, and make sure you use the same password for both.
-
-Now install nodejs and ruby 2.4:
-
-    apt-get install nodejs ruby=2.4
-
-You may have to pre-pend "sudo" to installation commands if you're not running as root. Now install the bundler gem:
-
-    gem install bundler
-
-Now you can let the Rails app install all the needed Ruby gems for you:
-
-    bundle install
-
-Note, bundler will complain (but still work) if you try to do this as root - you don't need to, unless you're in a VM (or docker) where there is ONLY a root user.
-
-You'll need to also setup PostgreSQL server, which is out of the scope of this README. Be sure to setup the `postgres` user with the password you picked above. Then run:
-
-    rake db:create db:migrate
-
-Now you should be able to run the app using the following command. We're specifying the same non-standard 3010 port so this rails app doesn't conflict with any others you may be running:
-
-    rails s -p 3010
-
-Go to http://localhost:3010 in your favorite browser. If everything's working correctly, you should see the greeting, "Yay! You're on Rails!"
 
 ## Post-Setup
 
