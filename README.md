@@ -49,8 +49,8 @@ Be sure to re-source this file in any open console windows to get it to work. No
 
 At least once, you should load the database with valid zip codes and metro areas. The import files are not in the repo, they're too large. They're located in Google Drive:
 
-* `postal-codes.csv`: https://drive.google.com/open?id=1vfwSF3bwX2GnM7fLq3iktgR7CDIhaPsI
-* `msa.txt`: https://drive.google.com/open?id=16oM_ZJXogOBtz9U6MDEaZXzW6fn4AMog
+* `postal-codes.csv`: https://drive.google.com/a/bebraven.org/file/d/1uyhCoe7BB4mTfFa8vmcG9udln5VQ9d8v/view?usp=sharing
+* `msa.txt`: https://drive.google.com/a/bebraven.org/file/d/16oM_ZJXogOBtz9U6MDEaZXzW6fn4AMog/view?usp=sharing
 
 Copy them to the `tmp`, then:
 
