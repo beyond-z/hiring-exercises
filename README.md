@@ -27,6 +27,8 @@ Now create the needed databases.
 
 We've configured Docker to run our Rails app on port 3010, so go to http://localhost:3010 in your favorite browser. If everything's working correctly, you should be brought to a login page. Login with career.admin@bebraven.org with password test1234. If that works, you should see a page with a list of Opportunities, Fellows, Industries, etc.
 
+**For the hiring exercises, you can STOP here when setting up your development environment. The rest of this is just extra to help you actually complete the exercise.**
+
 To see the Fellow experience (as opposed to admin), open up `docs/TestFellowAccount_SoftwareEngineerHiring.csv`, change `<insertyouremail>` in Column D to your actual email, save and upload the .csv under the Fellows page from the admin dashboard (accessed above). Finally, email the Braven tech team with the user name and email to add to the staging environment so you can login.
 
 To interact with the app in the console, run this:
