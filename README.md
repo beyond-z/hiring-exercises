@@ -25,7 +25,7 @@ Now create the needed databases.
 
     docker-compose exec career-mgr rake db:create db:schema:load db:init db:seed
 
-We've configured Docker to run our Rails app on port 3010, so go to http://localhost:3010 in your favorite browser. If everything's working correctly, you should be brought to a login page. Login with career.admin@bebraven.org with password test1234. If that works, you should see a page with a list of Opportunities, Fellows, Industries, etc.
+We've configured Docker to run our Rails app on port 3050, so go to http://localhost:3050 in your favorite browser. If everything's working correctly, you should be brought to a login page. Login with career.admin@bebraven.org with password test1234. If that works, you should see a page with a list of Opportunities, Fellows, Industries, etc.
 
 **For the hiring exercises, you can STOP here when setting up your development environment. The rest of this is just extra to help you actually complete the exercise.**
 

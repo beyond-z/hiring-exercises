@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3010:3010"
+      - "3050:3050"
     volumes:
       - .:/usr/src/app
     env_file:
@@ -18,7 +18,7 @@ services:
       context: .
       dockerfile: Dockerfile.spec
     ports:
-      - "3011:3011"
+      - "3051:3051"
     volumes:
       - .:/usr/src/app
     env_file:
@@ -36,7 +36,7 @@ services:
     logging:
       driver: none
     ports:
-      - "5900:5900"
+      - "5905:5905"
       
   redis:
     image: redis
