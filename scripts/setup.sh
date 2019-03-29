@@ -1,6 +1,5 @@
 #!/bin/bash
-cd ..
-echo "`date`: Copying environment files from: `pwd`"
+echo "`date`: Copying environment files in: `pwd`"
 cp .env.example .env
 cp .env.database.example .env.database
 echo "Building and bring the Docker containers up"
