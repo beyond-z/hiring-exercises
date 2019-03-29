@@ -2,7 +2,7 @@ version: '3'
 
 services:
       
-  career-mgr:
+  career-mgr-hiring:
     build: 
       context: .
       dockerfile: Dockerfile
@@ -13,7 +13,7 @@ services:
     env_file:
       - .env
       
-  career-spec:
+  career-spec-hiring:
     build: 
       context: .
       dockerfile: Dockerfile.spec
@@ -24,25 +24,25 @@ services:
     env_file:
       - .env
 
-  database:
+  database-hiring:
     image: postgres
     env_file:
       - .env.database
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - db_data_hiring:/var/lib/postgresql/data
       
-  chrome:
+  chrome-hiring:
     image: selenium/standalone-chrome-debug
     logging:
       driver: none
     ports:
       - "5905:5905"
       
-  redis:
+  redis-hiring:
     image: redis
     
-  redis-spec:
+  redis-spec-hiring:
     image: redis
 
 volumes:
-  db-data:
+  db_data_hiring:
